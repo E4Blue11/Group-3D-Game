@@ -8,6 +8,9 @@
 ### Description: 
 A shooter must defend themselves from zombies in a dark arena; they have only a flashlight as their light source. 
 
+### Gameplay Demo:
+[Watch Gameplay Demo](https://sdsu.instructure.com/files/23742735/download?download_frd=1&location=conversation_message_12135217&verifier=5119ba5b-2326-4f95-ba7a-7ead3350214a)
+
 ### General Goals: 
 * Christian Chang- Add zombie variants and difficulty scaling
 * Yomna Fassatoui- Shooting effects and zombie attack animations
