@@ -15,7 +15,8 @@ public class ZombieAI : MonoBehaviour
     private Transform player;
     private PlayerHealth playerHealth;
     private NavMeshAgent agent;
-    private float nextAttackTime;
+    private Sandevistan sandevistan;
+    private float attackTimer;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class ZombieAI : MonoBehaviour
         {
             player = playerObject.transform;
             playerHealth = playerObject.GetComponent<PlayerHealth>();
+            sandevistan = playerObject.GetComponent<Sandevistan>();
         }
     }
 
@@ -54,9 +56,16 @@ public class ZombieAI : MonoBehaviour
             agent.isStopped = true;
         }
 
+        // Slow attack timer during Sandevistan
+        float attackSpeed = 1f;
+
+        if (sandevistan != null && sandevistan.IsActive)
+            attackSpeed = sandevistan.slowMultiplier;
+
+        attackTimer -= Time.deltaTime * attackSpeed;
+
         // Attack when close enough
-        if (distance <= attackRange &&
-            Time.time >= nextAttackTime)
+        if (distance <= attackRange && attackTimer <= 0f)
         {
             Attack();
         }
@@ -69,6 +78,6 @@ public class ZombieAI : MonoBehaviour
 
         // Damage the player
         playerHealth.TakeDamage(attackDamage);
-        nextAttackTime = Time.time + attackCooldown;
+        attackTimer = attackCooldown;
     }
 }
